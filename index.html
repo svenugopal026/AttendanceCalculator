@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Attendance Calculator</title>
+   <title>Per day 7 Hours</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            color: #4CAF50;
+        }
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            text-align: left;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+        }
+        .result p {
+            background-color: #e7f3e7;
+            padding: 10px;
+            border: 1px solid #d0e6d0;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1><font color="#FF9900">Student Attendance Calculator</font></h1>
+        <form id="attendanceForm" class="form-grid">
+            <label for="totalClasses">Total No. of Classes:</label>
+            <input type="number" id="totalClasses" required>
+            
+            <label for="missedFunction">No. of Classes Missed for Function:</label>
+            <input type="number" id="missedFunction" required>
+            
+            <label for="missedFun">No. of Classes Missed for Fun & Joy:</label>
+            <input type="number" id="missedFun" required>
+            
+            <label for="missedHealth">No. of Classes Missed for Health Issue:</label>
+            <input type="number" id="missedHealth" required>
+            
+            <label for="missedOthers">No. of Classes Missed for Other Reasons:</label>
+            <input type="number" id="missedOthers" required>
+            
+            <div></div>
+            <button type="button" onclick="calculateAttendance()">Calculate Attendance</button>
+        </form>
+        <div class="result" id="result"></div>
+    </div>
+    
+    <script>
+        function calculateAttendance() {
+            // Get input values
+            let totalClasses = document.getElementById('totalClasses').value;
+            let missedFunction = document.getElementById('missedFunction').value;
+            let missedFun = document.getElementById('missedFun').value;
+            let missedHealth = document.getElementById('missedHealth').value;
+            let missedOthers = document.getElementById('missedOthers').value;
+            
+            // Convert inputs to numbers
+            totalClasses = parseInt(totalClasses);
+            missedFunction = parseInt(missedFunction);
+            missedFun = parseInt(missedFun);
+            missedHealth = parseInt(missedHealth);
+            missedOthers = parseInt(missedOthers);
+            
+            // Calculate total missed classes
+            let totalMissed = missedFunction + missedFun + missedHealth + missedOthers;
+            
+            // Calculate attendance percentage
+            let attendancePercentage = ((totalClasses - totalMissed) / totalClasses) * 100;
+            
+            // Calculate number of days not attended
+            let daysNotAttended = totalMissed / 7;
+            
+            // Display the results
+            let resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = `<p>Total Missed Classes: ${totalMissed}</p>
+                                   <p>Attendance Percentage: ${attendancePercentage.toFixed(2)}%</p>
+                                   <p>No. of Days Not Attended (College/School): ${daysNotAttended.toFixed(2)}</p>`;
+        }
+    </script>
+</body>
+</html>
